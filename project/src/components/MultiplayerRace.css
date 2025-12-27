@@ -1,0 +1,197 @@
+.multiplayer-race {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.race-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(26, 26, 46, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.race-header h2 {
+    margin: 0;
+    font-size: 1.75rem;
+}
+
+.race-stats {
+    display: flex;
+    gap: 2rem;
+}
+
+.progress-bars {
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background: rgba(26, 26, 46, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.player-progress {
+    display: grid;
+    grid-template-columns: 150px 1fr 60px;
+    gap: 1rem;
+    align-items: center;
+}
+
+.player-name-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+}
+
+.player-avatar-small {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: white;
+    flex-shrink: 0;
+}
+
+.finish-badge {
+    font-size: 1.25rem;
+    animation: bounce 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes bounce {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-5px);
+    }
+}
+
+.progress-bar-container {
+    height: 30px;
+    background: rgba(15, 15, 30, 0.8);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-md);
+    transition: width 0.3s ease-out;
+    position: relative;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+}
+
+.progress-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.progress-percent {
+    font-weight: 700;
+    color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+.words-display-race {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 2.5rem;
+    background: rgba(26, 26, 46, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-lg);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    font-size: 1.5rem;
+    line-height: 2.25rem;
+    font-family: 'JetBrains Mono', monospace;
+    min-height: 250px;
+    position: relative;
+}
+
+.words-display-race:focus-within {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+}
+
+.race-finished {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: rgba(16, 185, 129, 0.1);
+    border: 2px solid var(--accent-success);
+    border-radius: var(--radius-lg);
+    text-align: center;
+}
+
+.race-finished h3 {
+    margin: 0 0 0.5rem 0;
+    color: var(--accent-success);
+    font-size: 2rem;
+}
+
+.race-finished p {
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+    .race-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .progress-bars {
+        padding: 1.5rem;
+    }
+
+    .player-progress {
+        grid-template-columns: 120px 1fr 50px;
+        gap: 0.75rem;
+    }
+
+    .player-name-tag {
+        font-size: 0.9rem;
+    }
+
+    .words-display-race {
+        font-size: 1.25rem;
+        line-height: 2rem;
+        padding: 1.5rem;
+    }
+}
