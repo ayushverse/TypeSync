@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 import MultiplayerRace from '../components/MultiplayerRace';
 import './Multiplayer.css';
 
-const SOCKET_URL = 'http://localhost:3001';
+const SOCKET_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
 
 function Multiplayer() {
     const navigate = useNavigate();
