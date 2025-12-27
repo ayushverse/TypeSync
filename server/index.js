@@ -5,10 +5,23 @@ import cors from 'cors';
 
 const app = express();
 const httpServer = createServer(app);
+
+const allowedOrigins = [
+    'http://localhost:5173',
+    process.env.FRONTEND_URL
+].filter(Boolean);
+
 const io = new Server(httpServer, {
     cors: {
-        origin: "http://localhost:5173",
-        methods: ["GET", "POST"]
+        origin: (origin, callback) => {
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error('Not allowed by CORS'));
+            }
+        },
+        methods: ["GET", "POST"],
+        credentials: true
     }
 });
 
@@ -251,7 +264,7 @@ app.get('/', (req, res) => {
     });
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 5673;
 
 httpServer.listen(PORT, () => {
     console.log(`🚀 typeSync server running on port ${PORT}`);
