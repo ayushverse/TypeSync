@@ -85,7 +85,7 @@ function Home() {
         },
         {
             id: 'multiplayer',
-            title: 'MULTIPLAYER RACE',
+            title: 'MULTIPLAYER',
             subtitle: 'Compete with others in real-time',
             path: '/multiplayer'
         }

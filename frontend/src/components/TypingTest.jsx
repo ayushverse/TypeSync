@@ -35,8 +35,15 @@ function TypingTest({ duration = 60, onComplete, showTimer = true }) {
         }
     }, [isStarted, isFinished, timeLeft]);
 
+    // Continuously add more words to ensure infinite words until timer ends
+    useEffect(() => {
+        if (isStarted && !isFinished && currentWordIndex > words.length - 30) {
+            setWords(prevWords => [...prevWords, ...getRandomWords(50)]);
+        }
+    }, [currentWordIndex, isStarted, isFinished]);
+
     const resetTest = () => {
-        const newWords = getRandomWords(100);
+        const newWords = getRandomWords(200);
         setWords(newWords);
         setCurrentInput('');
         setCurrentWordIndex(0);
@@ -90,10 +97,6 @@ function TypingTest({ duration = 60, onComplete, showTimer = true }) {
             setCurrentWordIndex(currentWordIndex + 1);
             setCurrentCharIndex(0);
             setCurrentInput('');
-
-            if (currentWordIndex >= words.length - 10) {
-                setWords([...words, ...getRandomWords(50)]);
-            }
         } else {
             setCurrentCharIndex(value.length);
         }
