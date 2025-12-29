@@ -106,6 +106,9 @@ function MultiplayerRace({ socket, gameData, players, onProgressUpdate, onComple
                         <span className="stat-label">Accuracy</span>
                     </div>
                 </div>
+                <button className="btn btn-secondary" onClick={onComplete}>
+                    ← Leave Race
+                </button>
             </div>
 
             <div className="progress-bars">

@@ -9,9 +9,10 @@
 }
 
 .race-header {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
+    gap: 2rem;
     margin-bottom: 2rem;
     padding: 1.5rem;
     background: rgba(26, 26, 46, 0.6);
@@ -23,6 +24,11 @@
 .race-header h2 {
     margin: 0;
     font-size: 1.75rem;
+    text-align: center;
+}
+
+.race-header .btn {
+    justify-self: end;
 }
 
 .race-stats {
