@@ -2,90 +2,169 @@
     min-height: 100vh;
     padding: 2rem 0;
     background: var(--gradient-dark);
-}
-
-.solo-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 3rem;
-    padding: 1.5rem 0;
-}
-
-.solo-header h1 {
-    font-size: 2.5rem;
-    margin: 0;
-}
-
-.test-config {
-    max-width: 600px;
-    margin: 4rem auto;
-    padding: 3rem;
-    background: rgba(26, 26, 46, 0.6);
-    backdrop-filter: blur(10px);
-    border-radius: var(--radius-xl);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    text-align: center;
-}
-
-.test-config h3 {
-    margin-bottom: 2rem;
-    color: var(--text-secondary);
-    font-weight: 500;
-}
-
-.duration-selector {
-    display: flex;
-    gap: 1rem;
     justify-content: center;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
 }
 
-.duration-btn {
-    padding: 1rem 2rem;
-    border-radius: var(--radius-md);
-    background: var(--bg-accent);
-    color: var(--text-primary);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    font-size: 1.25rem;
-    font-weight: 600;
+.solo-page .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* GTA-Style Menu Container */
+.solo-menu-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.solo-title {
+    margin-bottom: 6rem;
+    text-align: left;
+    padding-left: 2rem;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 1rem;
+    letter-spacing: 0.2em;
     cursor: pointer;
-    transition: all var(--transition-normal);
-    min-width: 80px;
+    margin-bottom: 2rem;
+    padding: 0.5rem 0;
+    transition: all 0.2s ease;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
 }
 
-.duration-btn:hover {
-    border-color: var(--accent-primary);
-    transform: translateY(-2px);
+.back-btn:hover {
+    color: var(--accent-primary);
+    transform: translateX(-5px);
 }
 
-.duration-btn.active {
+.menu-title {
+    font-size: 4.5rem;
+    font-weight: 900;
+    letter-spacing: 0.2em;
     background: var(--gradient-primary);
-    border-color: transparent;
-    box-shadow: var(--shadow-glow);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    line-height: 1;
+    filter: drop-shadow(0 0 40px rgba(255, 8, 68, 0.6));
+}
+
+.menu-subtitle {
+    font-size: 1.1rem;
+    letter-spacing: 0.3em;
+    color: var(--text-secondary);
+    margin: 1rem 0 0 0.5rem;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+/* Duration Menu - GTA Style */
+.duration-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-left: 4rem;
+}
+
+.duration-menu-item {
+    cursor: pointer;
+    padding: 1.5rem 2rem;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    border-left: 4px solid transparent;
+    animation: slideInLeft 0.6s ease-out both;
+}
+
+.duration-menu-item::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: var(--gradient-primary);
+    transform: scaleY(0);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.duration-menu-item.active::before,
+.duration-menu-item.selected::before {
+    transform: scaleY(1);
+}
+
+.duration-menu-item.active,
+.duration-menu-item.selected {
+    transform: translateX(20px);
+    border-left-color: var(--accent-primary);
+}
+
+.duration-menu-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+}
+
+.duration-menu-item.active .duration-menu-title,
+.duration-menu-item.selected .duration-menu-title {
+    color: var(--accent-primary);
+    text-shadow: 0 0 20px rgba(255, 8, 68, 0.8);
 }
 
 .test-container {
     padding: 2rem 0;
 }
 
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-    .solo-header h1 {
-        font-size: 1.75rem;
+    .solo-title {
+        padding-left: 1rem;
+        margin-bottom: 4rem;
     }
 
-    .test-config {
-        padding: 2rem;
+    .menu-title {
+        font-size: 3rem;
     }
 
-    .duration-selector {
-        gap: 0.5rem;
+    .menu-subtitle {
+        font-size: 0.9rem;
     }
 
-    .duration-btn {
-        padding: 0.75rem 1.5rem;
-        font-size: 1rem;
-        min-width: 60px;
+    .duration-menu {
+        padding-left: 1.5rem;
+    }
+
+    .duration-menu-title {
+        font-size: 2rem;
+    }
+
+    .duration-menu-item.active,
+    .duration-menu-item.selected {
+        transform: translateX(10px);
     }
 }
