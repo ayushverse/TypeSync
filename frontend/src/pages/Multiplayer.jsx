@@ -17,6 +17,55 @@ function Multiplayer() {
     const [gameStarted, setGameStarted] = useState(false);
     const [gameData, setGameData] = useState(null);
     const [error, setError] = useState('');
+    const [selectedOption, setSelectedOption] = useState(null);
+
+    // Audio setup
+    useEffect(() => {
+        const initAudio = () => {
+            window.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            document.removeEventListener('click', initAudio);
+        };
+        document.addEventListener('click', initAudio);
+        return () => document.removeEventListener('click', initAudio);
+    }, []);
+
+    const playHoverSound = () => {
+        if (!window.audioContext) return;
+        const oscillator = window.audioContext.createOscillator();
+        const gainNode = window.audioContext.createGain();
+        oscillator.connect(gainNode);
+        gainNode.connect(window.audioContext.destination);
+        oscillator.frequency.value = 800;
+        oscillator.type = 'sine';
+        gainNode.gain.setValueAtTime(0.1, window.audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, window.audioContext.currentTime + 0.1);
+        oscillator.start(window.audioContext.currentTime);
+        oscillator.stop(window.audioContext.currentTime + 0.1);
+    };
+
+    const playClickSound = () => {
+        if (!window.audioContext) return;
+        const oscillator = window.audioContext.createOscillator();
+        const gainNode = window.audioContext.createGain();
+        oscillator.connect(gainNode);
+        gainNode.connect(window.audioContext.destination);
+        oscillator.frequency.value = 600;
+        oscillator.type = 'sine';
+        gainNode.gain.setValueAtTime(0.15, window.audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, window.audioContext.currentTime + 0.15);
+        oscillator.start(window.audioContext.currentTime);
+        oscillator.stop(window.audioContext.currentTime + 0.15);
+    };
+
+    const handleMenuHover = (option) => {
+        setSelectedOption(option);
+        playHoverSound();
+    };
+
+    const handleMenuSelect = (option) => {
+        playClickSound();
+        setSelectedOption(option);
+    };
 
     useEffect(() => {
         const newSocket = io(SOCKET_URL);
@@ -197,66 +246,82 @@ function Multiplayer() {
     return (
         <div className="multiplayer-page">
             <div className="container">
-                <header className="multiplayer-header">
-                    <button className="btn btn-secondary" onClick={() => navigate('/')}>
-                        ← Back
-                    </button>
-                    <h1 className="gradient-text">Multiplayer</h1>
-                    <div style={{ width: '100px' }}></div>
-                </header>
-
-                <div className="join-options fade-in">
-                    <div className="option-card glass">
-                        <div className="option-icon"></div>
-                        <h2>Create Room</h2>
-                        <p>Start a new game and invite friends</p>
-
-                        <input
-                            type="text"
-                            placeholder="Enter your username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            maxLength={20}
-                        />
-
-                        <button className="btn btn-primary glow" onClick={handleCreateRoom}>
-                            Create Room
+                <div className="multiplayer-menu-container">
+                    <div className="multiplayer-title">
+                        <button className="back-btn" onClick={() => navigate('/')}>
+                            ← BACK
                         </button>
+                        <h1 className="menu-title">MULTIPLAYER</h1>
+                        <p className="menu-subtitle">COMPETE IN REAL-TIME</p>
                     </div>
 
-                    <div className="option-card glass">
-                        <div className="option-icon"></div>
-                        <h2>Join Room</h2>
-                        <p>Join an existing game with a code</p>
+                    <div className="mp-menu-options">
+                        <div
+                            className={`mp-menu-item ${selectedOption === 'create' ? 'active' : ''}`}
+                            onMouseEnter={() => handleMenuHover('create')}
+                            onMouseLeave={() => setSelectedOption(null)}
+                        >
+                            <div className="mp-menu-title" onClick={() => handleMenuSelect('create')}>
+                                CREATE ROOM
+                            </div>
+                            {selectedOption === 'create' && (
+                                <div className="mp-menu-content">
+                                    <input
+                                        type="text"
+                                        placeholder="ENTER USERNAME"
+                                        value={username}
+                                        onChange={(e) => setUsername(e.target.value)}
+                                        maxLength={20}
+                                        className="mp-input"
+                                    />
+                                    <button className="mp-action-btn" onClick={handleCreateRoom}>
+                                        → START
+                                    </button>
+                                </div>
+                            )}
+                        </div>
 
-                        <input
-                            type="text"
-                            placeholder="Enter your username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            maxLength={20}
-                        />
-
-                        <input
-                            type="text"
-                            placeholder="Enter room code"
-                            value={roomCode}
-                            onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
-                            maxLength={6}
-                            style={{ marginTop: '1rem' }}
-                        />
-
-                        <button className="btn btn-primary" onClick={handleJoinRoom}>
-                            Join Room
-                        </button>
+                        <div
+                            className={`mp-menu-item ${selectedOption === 'join' ? 'active' : ''}`}
+                            onMouseEnter={() => handleMenuHover('join')}
+                            onMouseLeave={() => setSelectedOption(null)}
+                        >
+                            <div className="mp-menu-title" onClick={() => handleMenuSelect('join')}>
+                                JOIN ROOM
+                            </div>
+                            {selectedOption === 'join' && (
+                                <div className="mp-menu-content">
+                                    <input
+                                        type="text"
+                                        placeholder="ENTER USERNAME"
+                                        value={username}
+                                        onChange={(e) => setUsername(e.target.value)}
+                                        maxLength={20}
+                                        className="mp-input"
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="ENTER ROOM CODE"
+                                        value={roomCode}
+                                        onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
+                                        maxLength={6}
+                                        className="mp-input"
+                                        style={{ marginTop: '1rem' }}
+                                    />
+                                    <button className="mp-action-btn" onClick={handleJoinRoom}>
+                                        → JOIN
+                                    </button>
+                                </div>
+                            )}
+                        </div>
                     </div>
+
+                    {error && (
+                        <div className="mp-error-message">
+                            {error}
+                        </div>
+                    )}
                 </div>
-
-                {error && (
-                    <div className="error-banner fade-in">
-                        {error}
-                    </div>
-                )}
             </div>
         </div>
     );
