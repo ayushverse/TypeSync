@@ -90,7 +90,7 @@ function Solo() {
                             {durations.map((d, index) => (
                                 <div
                                     key={d}
-                                    className={`duration-menu-item ${hoveredDuration === d ? 'active' : ''} ${duration === d ? 'selected' : ''}`}
+                                    className={`duration-menu-item ${hoveredDuration === d ? 'active' : ''}`}
                                     onMouseEnter={() => {
                                         setHoveredDuration(d);
                                         playHoverSound();

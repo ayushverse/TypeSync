@@ -96,13 +96,11 @@
     transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.duration-menu-item.active::before,
-.duration-menu-item.selected::before {
+.duration-menu-item.active::before {
     transform: scaleY(1);
 }
 
-.duration-menu-item.active,
-.duration-menu-item.selected {
+.duration-menu-item.active {
     transform: translateX(20px);
     border-left-color: var(--accent-primary);
 }
@@ -118,8 +116,7 @@
     text-transform: uppercase;
 }
 
-.duration-menu-item.active .duration-menu-title,
-.duration-menu-item.selected .duration-menu-title {
+.duration-menu-item.active .duration-menu-title {
     color: var(--accent-primary);
     text-shadow: 0 0 20px rgba(255, 8, 68, 0.8);
 }
