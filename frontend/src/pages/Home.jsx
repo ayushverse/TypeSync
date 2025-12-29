@@ -1,10 +1,73 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
 
 function Home() {
     const navigate = useNavigate();
     const [hoveredOption, setHoveredOption] = useState(null);
+
+    // Create audio context for sound effects
+    useEffect(() => {
+        // Initialize on first user interaction to comply with browser autoplay policies
+        const initAudio = () => {
+            window.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            document.removeEventListener('click', initAudio);
+        };
+        document.addEventListener('click', initAudio);
+        return () => document.removeEventListener('click', initAudio);
+    }, []);
+
+    // Play hover sound (UI beep like GTA)
+    const playHoverSound = () => {
+        if (!window.audioContext) return;
+
+        const oscillator = window.audioContext.createOscillator();
+        const gainNode = window.audioContext.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(window.audioContext.destination);
+
+        // UI beep sound - short and subtle
+        oscillator.frequency.value = 800; // Hz
+        oscillator.type = 'sine';
+
+        gainNode.gain.setValueAtTime(0.1, window.audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, window.audioContext.currentTime + 0.1);
+
+        oscillator.start(window.audioContext.currentTime);
+        oscillator.stop(window.audioContext.currentTime + 0.1);
+    };
+
+    // Play click sound (deeper confirmation beep)
+    const playClickSound = () => {
+        if (!window.audioContext) return;
+
+        const oscillator = window.audioContext.createOscillator();
+        const gainNode = window.audioContext.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(window.audioContext.destination);
+
+        // Deeper confirmation sound
+        oscillator.frequency.value = 600; // Hz
+        oscillator.type = 'sine';
+
+        gainNode.gain.setValueAtTime(0.15, window.audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, window.audioContext.currentTime + 0.15);
+
+        oscillator.start(window.audioContext.currentTime);
+        oscillator.stop(window.audioContext.currentTime + 0.15);
+    };
+
+    const handleHover = (optionId) => {
+        setHoveredOption(optionId);
+        playHoverSound();
+    };
+
+    const handleClick = (path) => {
+        playClickSound();
+        setTimeout(() => navigate(path), 100);
+    };
 
     const menuOptions = [
         {
@@ -34,9 +97,9 @@ function Home() {
                         <div
                             key={option.id}
                             className={`menu-item ${hoveredOption === option.id ? 'active' : ''}`}
-                            onMouseEnter={() => setHoveredOption(option.id)}
+                            onMouseEnter={() => handleHover(option.id)}
                             onMouseLeave={() => setHoveredOption(null)}
-                            onClick={() => navigate(option.path)}
+                            onClick={() => handleClick(option.path)}
                             style={{ animationDelay: `${index * 0.1}s` }}
                         >
                             <div className="menu-item-title">{option.title}</div>
