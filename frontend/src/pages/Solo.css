@@ -3,6 +3,7 @@
     padding: 2rem 0;
     background: var(--gradient-dark);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -11,6 +12,9 @@
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* GTA-Style Menu Container */
@@ -123,6 +127,9 @@
 
 .test-container {
     padding: 2rem 0;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 @keyframes slideInLeft {
