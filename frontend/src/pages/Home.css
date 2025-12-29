@@ -1,260 +1,173 @@
 .home {
     min-height: 100vh;
-    position: relative;
-    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.home-background {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
+    position: relative;
     overflow: hidden;
 }
 
-.gradient-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.3;
-    animation: float 20s ease-in-out infinite;
-}
-
-.orb-1 {
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, #8b5cf6, transparent);
-    top: -250px;
-    left: -250px;
-    animation-delay: 0s;
-}
-
-.orb-2 {
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, #ec4899, transparent);
-    bottom: -200px;
-    right: -200px;
-    animation-delay: -7s;
-}
-
-.orb-3 {
-    width: 450px;
-    height: 450px;
-    background: radial-gradient(circle, #06b6d4, transparent);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation-delay: -14s;
-}
-
-@keyframes float {
-
-    0%,
-    100% {
-        transform: translate(0, 0) scale(1);
-    }
-
-    25% {
-        transform: translate(100px, -100px) scale(1.1);
-    }
-
-    50% {
-        transform: translate(-100px, 100px) scale(0.9);
-    }
-
-    75% {
-        transform: translate(100px, 100px) scale(1.05);
-    }
-}
-
-.home-content {
+.home-container {
     position: relative;
     z-index: 1;
-    padding: 2rem;
+    max-width: 800px;
     width: 100%;
+    padding: 2rem;
 }
 
-.home-header {
-    text-align: center;
-    margin-bottom: 4rem;
+/* Title Section - GTA Style */
+.home-title {
+    margin-bottom: 6rem;
+    text-align: left;
+    padding-left: 2rem;
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.logo-icon {
-    font-size: 4rem;
-    animation: pulse 2s ease-in-out infinite;
-}
-
-.logo-text {
-    font-size: 4rem;
-    font-weight: 800;
-    letter-spacing: -0.05em;
-}
-
-.tagline {
-    font-size: 1.25rem;
-    color: var(--text-secondary);
-    font-weight: 400;
-}
-
-.mode-selection {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-    margin-bottom: 4rem;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.mode-card {
-    padding: 2.5rem;
-    border-radius: 1.5rem;
-    background: rgba(26, 26, 46, 0.6);
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.05);
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.mode-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--gradient-primary);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: -1;
-}
-
-.mode-card:hover::before {
-    opacity: 0.05;
-}
-
-.mode-card:hover {
-    transform: translateY(-8px);
-    border-color: var(--accent-primary);
-    box-shadow: 0 20px 60px rgba(139, 92, 246, 0.3);
-}
-
-.solo-card {
-    animation-delay: 0.1s;
-}
-
-.multiplayer-card {
-    animation-delay: 0.2s;
-}
-
-.mode-icon {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
-}
-
-.mode-card h2 {
-    font-size: 1.75rem;
-    margin: 0;
+.game-title {
+    font-size: 5rem;
+    font-weight: 900;
+    letter-spacing: 0.2em;
     background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-}
-
-.mode-card>p {
-    color: var(--text-secondary);
     margin: 0;
-    font-size: 1rem;
+    line-height: 1;
+    text-shadow: 0 0 80px rgba(255, 8, 68, 0.5);
+    filter: drop-shadow(0 0 40px rgba(255, 8, 68, 0.6));
 }
 
-.mode-features {
+.game-subtitle {
+    font-size: 1.2rem;
+    letter-spacing: 0.3em;
+    color: var(--text-secondary);
+    margin: 1rem 0 0 0.5rem;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+/* Menu Container - GTA San Andreas Style */
+.menu-container {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    margin: 1rem 0;
-    padding: 1rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-left: 4rem;
 }
 
-.mode-features span {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
+.menu-item {
+    cursor: pointer;
+    padding: 1.5rem 2rem;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    border-left: 4px solid transparent;
+    animation: slideInLeft 0.6s ease-out both;
 }
 
-.mode-card .btn {
-    margin-top: auto;
-    width: 100%;
+.menu-item::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: var(--gradient-primary);
+    transform: scaleY(0);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.stats-preview {
-    display: flex;
-    justify-content: center;
-    gap: 4rem;
-    padding: 3rem;
-    background: rgba(26, 26, 46, 0.4);
-    backdrop-filter: blur(10px);
-    border-radius: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    max-width: 800px;
-    margin: 0 auto 3rem;
+.menu-item.active::before {
+    transform: scaleY(1);
 }
 
-.stat-item {
-    text-align: center;
+.menu-item.active {
+    transform: translateX(20px);
+    border-left-color: var(--accent-primary);
 }
 
-.stat-value {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+.menu-item.active .menu-item-title {
+    color: var(--accent-primary);
+    text-shadow: 0 0 20px rgba(255, 8, 68, 0.8);
 }
 
-.stat-label {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    text-transform: uppercase;
+.menu-item-title {
+    font-size: 3rem;
+    font-weight: 900;
     letter-spacing: 0.05em;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
 }
 
+.menu-item-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin-top: 0.5rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.menu-item.active .menu-item-subtitle {
+    opacity: 1;
+}
+
+/* Footer */
 .home-footer {
     text-align: center;
+    margin-top: 8rem;
     color: var(--text-dim);
     font-size: 0.9rem;
 }
 
+.home-footer p {
+    margin: 0;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* Animations */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-    .logo-text {
-        font-size: 2.5rem;
+    .home-title {
+        padding-left: 1rem;
+        margin-bottom: 4rem;
     }
 
-    .logo-icon {
-        font-size: 2.5rem;
+    .game-title {
+        font-size: 3rem;
     }
 
-    .mode-selection {
-        grid-template-columns: 1fr;
+    .game-subtitle {
+        font-size: 0.9rem;
     }
 
-    .stats-preview {
-        gap: 2rem;
-        padding: 2rem;
+    .menu-container {
+        padding-left: 1.5rem;
     }
 
-    .stat-value {
+    .menu-item-title {
         font-size: 2rem;
+    }
+
+    .menu-item.active {
+        transform: translateX(10px);
+    }
+
+    .home-footer {
+        margin-top: 4rem;
     }
 }
