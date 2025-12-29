@@ -1,4 +1,4 @@
-# typeSync ⚡
+# typeSync
 
 A multiplayer typing game inspired by MonkeyType. Practice your typing speed solo or compete with friends in real-time races!
 
@@ -6,21 +6,21 @@ A multiplayer typing game inspired by MonkeyType. Practice your typing speed sol
 
 ## Features
 
-### 🎯 Solo Mode
+### Solo Mode
 - Practice typing with multiple time options (15s, 30s, 60s, 120s)
 - Real-time WPM and accuracy tracking
 - Detailed statistics and performance feedback
 - Character-level error highlighting
 - Improvement tips based on performance
 
-### 🏆 Multiplayer Mode
+### Multiplayer Mode
 - Real-time competitive races with up to 10 players
 - Live progress tracking for all participants
 - Room-based system with shareable codes
 - Synchronized game start
 - Instant winner determination
 
-### ✨ Premium UI/UX
+### Premium UI/UX
 - Modern glassmorphism design
 - Smooth animations and transitions
 - Gradient color schemes
@@ -55,13 +55,13 @@ cd typeSync
 
 2. **Install frontend dependencies**
 ```bash
-cd project
+cd frontend
 npm install
 ```
 
 3. **Install backend dependencies**
 ```bash
-cd ../server
+cd ../backend
 npm install
 ```
 
@@ -71,14 +71,14 @@ You need to run both the frontend and backend servers:
 
 **Terminal 1 - Backend Server:**
 ```bash
-cd server
+cd backend
 npm start
 ```
 The server will run on `http://localhost:3001`
 
 **Terminal 2 - Frontend:**
 ```bash
-cd project
+cd frontend
 npm run dev
 ```
 The app will run on `http://localhost:5173`
@@ -101,7 +101,7 @@ The app will run on `http://localhost:5173`
 
 ```
 typeSync/
-├── project/                 # Frontend (Vite + React)
+├── frontend/                # Frontend (Vite + React)
 │   ├── src/
 │   │   ├── components/     # React components
 │   │   ├── pages/          # Page components
@@ -110,8 +110,8 @@ typeSync/
 │   │   └── index.css       # Global styles
 │   └── package.json
 │
-├── server/                 # Backend (Node.js + Socket.IO)
-│   ├── index.js           # Server entry point
+├── backend/                 # Backend (Node.js + Socket.IO)
+│   ├── index.js            # Server entry point
 │   └── package.json
 │
 └── README.md
@@ -168,6 +168,6 @@ MIT License - feel free to use this project for learning or personal use.
 
 ---
 
-**Happy Typing! ⚡**
+**Happy Typing!**
 
-Made with 💜 for the typing community
+Made for the typing community

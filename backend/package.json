@@ -1,0 +1,19 @@
+{
+    "name": "typesync-server",
+    "version": "1.0.0",
+    "description": "WebSocket server for typeSync multiplayer typing game",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "node index.js"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.22.1",
+        "socket.io": "^4.6.1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}
