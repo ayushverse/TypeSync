@@ -2,6 +2,15 @@
     min-height: 100vh;
     padding: 2rem 0;
     background: var(--gradient-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.multiplayer-page .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .multiplayer-header {
