@@ -159,16 +159,16 @@ function TypingTest({ duration = 60, onComplete, showTimer = true }) {
                     </div>
 
                     <div className="words-display">
-                        {words.slice(0, 50).map((word, wordIndex) => (
+                        {words.slice(currentWordIndex, currentWordIndex + 50).map((word, wordIndex) => (
                             <div
-                                key={wordIndex}
-                                className={`word ${wordIndex === currentWordIndex ? 'word-active' : ''} ${errors.includes(wordIndex) ? 'word-error' : ''
+                                key={currentWordIndex + wordIndex}
+                                className={`word ${wordIndex === 0 ? 'word-active' : ''} ${errors.includes(currentWordIndex + wordIndex) ? 'word-error' : ''
                                     }`}
                             >
                                 {word.split('').map((char, charIndex) => (
                                     <span
                                         key={charIndex}
-                                        className={`char ${getCharClass(wordIndex, charIndex)}`}
+                                        className={`char ${getCharClass(currentWordIndex + wordIndex, charIndex)}`}
                                     >
                                         {char}
                                     </span>
