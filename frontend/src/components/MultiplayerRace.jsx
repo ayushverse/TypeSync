@@ -164,7 +164,20 @@ function MultiplayerRace({ socket, gameData, players, onProgressUpdate, onComple
             {isFinished && (
                 <div className="race-finished fade-in">
                     <h3>🏁 Race Finished!</h3>
-                    <p>Waiting for other players...</p>
+                    <p>Great job! Your results have been recorded.</p>
+                    <div className="race-finish-stats">
+                        <div className="finish-stat">
+                            <span className="finish-stat-value gradient-text">{currentWPM}</span>
+                            <span className="finish-stat-label">WPM</span>
+                        </div>
+                        <div className="finish-stat">
+                            <span className="finish-stat-value gradient-text">{currentAccuracy}%</span>
+                            <span className="finish-stat-label">Accuracy</span>
+                        </div>
+                    </div>
+                    <button className="btn btn-primary" onClick={onComplete}>
+                        ← Return to Lobby
+                    </button>
                 </div>
             )}
         </div>
