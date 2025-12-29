@@ -16,11 +16,18 @@ function Solo() {
     // Audio setup
     useEffect(() => {
         const initAudio = () => {
-            window.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            if (!window.audioContext) {
+                window.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            document.removeEventListener('mousemove', initAudio);
             document.removeEventListener('click', initAudio);
         };
-        document.addEventListener('click', initAudio);
-        return () => document.removeEventListener('click', initAudio);
+        document.addEventListener('mousemove', initAudio, { once: true });
+        document.addEventListener('click', initAudio, { once: true });
+        return () => {
+            document.removeEventListener('mousemove', initAudio);
+            document.removeEventListener('click', initAudio);
+        };
     }, []);
 
     const playHoverSound = () => {
