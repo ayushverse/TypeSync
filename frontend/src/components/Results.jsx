@@ -26,7 +26,7 @@ function Results({ results, onRetry, onChangeDuration, durations }) {
                     <div className="result-stat primary">
                         <div className="stat-icon"></div>
                         <div className="stat-content">
-                            <div className="stat-value gradient-text">{wpm}</div>
+                            <div className="stat-value">{wpm}</div>
                             <div className="stat-label">Words Per Minute</div>
                         </div>
                     </div>
