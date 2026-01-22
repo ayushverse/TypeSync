@@ -6,7 +6,7 @@ function Home() {
     const navigate = useNavigate();
     const [hoveredOption, setHoveredOption] = useState(null);
 
-    // Create audio context for sound effects
+    // Create audio context for sound effects but there is small bug i jave to fix 
     useEffect(() => {
         // Initialize on first user interaction to comply with browser autoplay policies
         const initAudio = () => {
