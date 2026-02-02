@@ -32,8 +32,8 @@
     background-clip: text;
     margin: 0;
     line-height: 1;
-    text-shadow: 0 0 80px rgba(255, 8, 68, 0.5);
-    filter: drop-shadow(0 0 40px rgba(255, 8, 68, 0.6));
+    text-shadow: none;
+    filter: drop-shadow(0 0 20px rgba(255, 8, 68, 0.4));
 }
 
 .game-subtitle {
@@ -46,6 +46,11 @@
 }
 
 /* Menu Container - GTA San Andreas Style */
+.auth-section-flat {
+    margin-bottom: 4rem;
+    padding-left: 2rem;
+}
+
 .menu-container {
     display: flex;
     flex-direction: column;
@@ -85,7 +90,6 @@
 
 .menu-item.active .menu-item-title {
     color: var(--accent-primary);
-    text-shadow: 0 0 20px rgba(255, 8, 68, 0.8);
 }
 
 .menu-item-title {

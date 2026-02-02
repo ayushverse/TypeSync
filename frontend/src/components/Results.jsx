@@ -15,79 +15,61 @@ function Results({ results, onRetry, onChangeDuration, durations }) {
     const performance = getPerformanceMessage();
 
     return (
-        <div className="results-container fade-in">
-            <div className="results-card glass">
+        <div className="section-flat fade-in">
+            <div className="container" style={{ maxWidth: '800px' }}>
                 <div className="results-header">
-                    <h2 style={{ color: performance.color }}>{performance.text}</h2>
-                    <p className="results-subtitle">Test Complete</p>
+                    <h2 style={{ color: performance.color }}>{performance.text.toUpperCase()}</h2>
+                    <p className="results-subtitle">RACE PERFORMANCE REPORT</p>
                 </div>
 
-                <div className="results-stats">
-                    <div className="result-stat primary">
-                        <div className="stat-icon"></div>
+                <div className="results-stats-flat">
+                    <div className="result-stat-flat primary">
                         <div className="stat-content">
                             <div className="stat-value">{wpm}</div>
-                            <div className="stat-label">Words Per Minute</div>
+                            <div className="stat-label">WORDS PER MINUTE</div>
                         </div>
                     </div>
 
-                    <div className="result-stat">
-                        <div className="stat-icon"></div>
-                        <div className="stat-content">
+                    <div className="flex gap-md" style={{ marginBottom: '2rem' }}>
+                        <div className="result-stat-flat flex-1">
                             <div className="stat-value">{accuracy}%</div>
-                            <div className="stat-label">Accuracy</div>
+                            <div className="stat-label">ACCURACY</div>
                         </div>
-                    </div>
-
-                    <div className="result-stat">
-                        <div className="stat-icon"></div>
-                        <div className="stat-content">
+                        <div className="result-stat-flat flex-1">
                             <div className="stat-value">{timeTaken}s</div>
-                            <div className="stat-label">Time Taken</div>
+                            <div className="stat-label">TIME</div>
                         </div>
                     </div>
 
-                    <div className="result-stat">
-                        <div className="stat-icon"></div>
-                        <div className="stat-content">
+                    <div className="flex gap-md" style={{ marginBottom: '3rem' }}>
+                        <div className="result-stat-flat flex-1">
                             <div className="stat-value">{correctChars}</div>
-                            <div className="stat-label">Correct Characters</div>
+                            <div className="stat-label">CORRECT</div>
                         </div>
-                    </div>
-
-                    <div className="result-stat">
-                        <div className="stat-icon"></div>
-                        <div className="stat-content">
+                        <div className="result-stat-flat flex-1">
                             <div className="stat-value">{errors}</div>
-                            <div className="stat-label">Errors</div>
-                        </div>
-                    </div>
-
-                    <div className="result-stat">
-                        <div className="stat-icon"></div>
-                        <div className="stat-content">
-                            <div className="stat-value">{totalChars}</div>
-                            <div className="stat-label">Total Characters</div>
+                            <div className="stat-label">ERRORS</div>
                         </div>
                     </div>
                 </div>
 
-                <div className="results-actions">
-                    <button className="btn btn-primary glow" onClick={onRetry}>
-                        ↻ Try Again
+                <div className="results-actions-flat">
+                    <button className="btn btn-primary" onClick={onRetry} style={{ width: '100%', marginBottom: '2rem' }}>
+                        RESTART RACE
                     </button>
 
                     {durations && (
-                        <div className="duration-change">
-                            <p>Try different duration:</p>
-                            <div className="duration-options">
+                        <div className="duration-change-flat">
+                            <p className="text-dim">FAST CHANGE DURATION:</p>
+                            <div className="flex gap-sm justify-center">
                                 {durations.map((d) => (
                                     <button
                                         key={d}
                                         className="btn btn-secondary"
                                         onClick={() => onChangeDuration(d)}
+                                        style={{ padding: '0.5rem 1rem' }}
                                     >
-                                        {d}s
+                                        {d}S
                                     </button>
                                 ))}
                             </div>
@@ -95,14 +77,13 @@ function Results({ results, onRetry, onChangeDuration, durations }) {
                     )}
                 </div>
 
-                <div className="results-tips">
-                    <h4>Tips to Improve</h4>
-                    <ul>
-                        {accuracy < 95 && <li>Focus on accuracy before speed</li>}
-                        {wpm < 60 && <li>Practice regularly to build muscle memory</li>}
-                        {errors > 5 && <li>Slow down and reduce errors</li>}
-                        <li>Keep your fingers on home row position</li>
-                        <li>Look at the screen, not your keyboard</li>
+                <div className="results-tips-flat" style={{ marginTop: '4rem' }}>
+                    <h4 className="text-dim">IMPROVEMENT STRATEGY</h4>
+                    <ul className="flex-col gap-sm" style={{ listStyle: 'none', padding: 0, marginTop: '1rem' }}>
+                        {accuracy < 95 && <li style={{ color: 'var(--accent-error)' }}>! Focus on accuracy before speed</li>}
+                        {wpm < 60 && <li>+ Practice regularly to build muscle memory</li>}
+                        {errors > 5 && <li>- Slow down and reduce errors</li>}
+                        <li>+ Keep fingers on home row position</li>
                     </ul>
                 </div>
             </div>

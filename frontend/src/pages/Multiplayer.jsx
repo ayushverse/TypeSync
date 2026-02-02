@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 import MultiplayerRace from '../components/MultiplayerRace';
 import './Multiplayer.css';
 
-const SOCKET_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5673';
+const SOCKET_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
 function Multiplayer() {
     const navigate = useNavigate();
@@ -204,26 +204,26 @@ function Multiplayer() {
                         <div style={{ width: '120px' }}></div>
                     </header>
 
-                    <div className="lobby-container fade-in">
-                        <div className="lobby-card glass">
-                            <div className="room-info">
-                                <h2>Room Code</h2>
-                                <div className="room-code-display">{roomCode}</div>
-                                <p className="room-hint">Share this code with friends to join</p>
+                    <div className="section-flat fade-in">
+                        <div className="container" style={{ maxWidth: '800px' }}>
+                            <div className="room-info" style={{ textAlign: 'left', marginBottom: '4rem', paddingLeft: '1rem', borderLeft: '4px solid var(--accent-primary)' }}>
+                                <p className="text-dim" style={{ fontSize: '0.8rem', letterSpacing: '0.1em' }}>ACCESS CODE</p>
+                                <div className="room-code-display" style={{ background: 'transparent', padding: '0', fontSize: '5rem', margin: '0.5rem 0' }}>{roomCode}</div>
+                                <p className="room-hint">SHARE THIS CODE WITH YOUR TEAM</p>
                             </div>
 
-                            <div className="players-section">
-                                <h3>Player ({roomPlayers.length}/10)</h3>
-                                <div className="players-list">
+                            <div className="players-section-flat" style={{ marginBottom: '4rem' }}>
+                                <h3 className="text-dim" style={{ fontSize: '0.9rem', marginBottom: '2rem' }}>ACTIVE CONNECTIONS ({roomPlayers.length}/10)</h3>
+                                <div className="flex-col gap-sm">
                                     {roomPlayers.map((player) => (
-                                        <div key={player.id} className="player-item">
-                                            <div className="player-avatar">
-                                                {player.username.charAt(0).toUpperCase()}
-                                            </div>
-                                            <div className="player-info">
-                                                <div className="player-name">{player.username}</div>
-                                                <div className={`player-status ${player.ready ? 'ready' : ''}`}>
-                                                    {player.ready ? '✓ Ready' : 'Not Ready'}
+                                        <div key={player.id} className="player-item-flat">
+                                            <div className="flex justify-between items-center" style={{ padding: '1.5rem', background: 'rgba(13, 13, 13, 0.4)', borderTop: '1px solid rgba(255, 8, 68, 0.1)' }}>
+                                                <div className="flex items-center gap-md">
+                                                    <span style={{ color: 'var(--accent-primary)', fontWeight: 'bold' }}>•</span>
+                                                    <div className="player-name" style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>{player.username.toUpperCase()}</div>
+                                                </div>
+                                                <div className={`player-status ${player.ready ? 'ready' : ''}`} style={{ fontSize: '0.8rem', letterSpacing: '0.1em' }}>
+                                                    {player.ready ? 'STABLE' : 'WAITING...'}
                                                 </div>
                                             </div>
                                         </div>
@@ -232,17 +232,16 @@ function Multiplayer() {
                             </div>
 
                             {!isReady ? (
-                                <button className="btn btn-primary glow" onClick={handleReady}>
-                                    Ready Up
+                                <button className="btn btn-primary" onClick={handleReady} style={{ width: '100%' }}>
+                                    INITIALIZE SYNC
                                 </button>
                             ) : (
-                                <div className="waiting-message">
-                                    <div className="pulse">⏳</div>
-                                    <p>Waiting for other players...</p>
+                                <div className="waiting-message-flat" style={{ textAlign: 'center', padding: '3rem', border: '1px solid rgba(255, 8, 68, 0.2)' }}>
+                                    <p className="pulse" style={{ color: 'var(--accent-primary)', fontWeight: 'bold' }}>SYNCING WITH OTHER NODES...</p>
                                 </div>
                             )}
 
-                            {error && <div className="error-message">{error}</div>}
+                            {error && <div className="error-message" style={{ marginTop: '2rem' }}>{error}</div>}
                         </div>
                     </div>
                 </div>

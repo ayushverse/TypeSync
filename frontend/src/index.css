@@ -51,15 +51,15 @@
   --radius-xl: 1.5rem;
   --radius-2xl: 2rem;
 
-  /* Shadows - Red Glow Effects */
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
-  --shadow-xl: 0 12px 40px rgba(0, 0, 0, 0.6);
-  --shadow-glow-sm: 0 0 20px rgba(255, 8, 68, 0.3);
-  --shadow-glow: 0 0 40px rgba(255, 8, 68, 0.4);
-  --shadow-glow-lg: 0 0 60px rgba(255, 8, 68, 0.5);
-  --shadow-red-intense: 0 0 80px rgba(255, 8, 68, 0.6), 0 0 120px rgba(255, 8, 68, 0.3);
+  /* Shadows - Minimal & Flat */
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-xl: none;
+  --shadow-glow-sm: 0 0 10px rgba(255, 8, 68, 0.2);
+  --shadow-glow: 0 0 20px rgba(255, 8, 68, 0.3);
+  --shadow-glow-lg: 0 0-40px rgba(255, 8, 68, 0.4);
+  --shadow-red-intense: 0 0 60px rgba(255, 8, 68, 0.5);
 
   /* Transitions */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -198,11 +198,10 @@ kbd {
 
 /* Utilities */
 .glass {
-  background: rgba(26, 10, 10, 0.5);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 8, 68, 0.15);
-  box-shadow: var(--shadow-lg), inset 0 0 40px rgba(255, 8, 68, 0.05);
+  background: rgba(13, 13, 13, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 8, 68, 0.2);
 }
 
 .gradient-text {
@@ -287,18 +286,23 @@ kbd {
   transform: none !important;
 }
 
-/* Card Component */
+/* Flattened Content Section */
+.section-flat {
+  background: rgba(13, 13, 13, 0.4);
+  padding: var(--spacing-2xl) 0;
+  border-top: 1px solid rgba(255, 8, 68, 0.1);
+  border-bottom: 1px solid rgba(255, 8, 68, 0.1);
+}
+
 .card {
-  background: var(--bg-secondary);
-  border-radius: var(--radius-lg);
+  background: transparent;
   padding: var(--spacing-xl);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-left: 4px solid var(--accent-primary);
   transition: all var(--transition-normal);
 }
 
 .card:hover {
-  border-color: rgba(139, 92, 246, 0.3);
-  box-shadow: var(--shadow-lg);
+  background: rgba(255, 8, 68, 0.05);
 }
 
 /* Input Styles - Red Cyberpunk */

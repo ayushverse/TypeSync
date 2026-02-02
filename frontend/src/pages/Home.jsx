@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import './Home.css';
+import { Snowfall } from "react-snowfall";
+
+
 
 function Home() {
     const navigate = useNavigate();
     const [hoveredOption, setHoveredOption] = useState(null);
+    const { user, logout } = useAuth();
 
-    // Create audio context for sound effects but there is small bug i jave to fix 
+    // Create audio context for sound effects
     useEffect(() => {
         // Initialize on first user interaction to comply with browser autoplay policies
         const initAudio = () => {
@@ -88,15 +93,46 @@ function Home() {
             title: 'MULTIPLAYER',
             subtitle: 'Compete with others in real-time',
             path: '/multiplayer'
+        },
+        {
+            id: 'leaderboard',
+            title: 'RANKINGS',
+            subtitle: 'Global typing leaderboard',
+            path: '/leaderboard'
+        },
+        {
+            id: 'tournaments',
+            title: 'TOURNAMENTS',
+            subtitle: 'Competitive scheduled events',
+            path: '/tournaments'
         }
     ];
 
     return (
         <div className="home">
+            {/* <Snowfall color={"#82C3D9"} /> */}
             <div className="home-container">
                 <div className="home-title fade-in">
                     <h1 className="game-title">TYPESYNC</h1>
                     <p className="game-subtitle">MASTER YOUR TYPING SPEED</p>
+                </div>
+
+                <div className="auth-section-flat fade-in">
+                    {user ? (
+                        <div className="flex gap-md items-center justify-center">
+                            <span style={{ color: 'var(--accent-primary)', fontWeight: 'bold' }}>{user.username.toUpperCase()}</span>
+                            <button className="btn btn-secondary" onClick={() => navigate('/profile')}>
+                                PROFILE
+                            </button>
+                            <button className="btn btn-secondary" onClick={logout}>
+                                LOGOUT
+                            </button>
+                        </div>
+                    ) : (
+                        <button className="btn btn-secondary" onClick={() => handleClick('/login')}>
+                            LOGIN / PROFILE
+                        </button>
+                    )}
                 </div>
 
                 <div className="menu-container">

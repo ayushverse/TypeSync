@@ -136,9 +136,9 @@ function TypingTest({ duration = 60, onComplete, showTimer = true }) {
                 <>
                     <div className="test-header">
                         {showTimer && (
-                            <div className="timer">
-                                <span className="timer-value">{timeLeft}</span>
-                                <span className="timer-label">seconds</span>
+                            <div className="timer-flat">
+                                <div className="timer-value">{timeLeft}</div>
+                                <div className="timer-label">SECONDS REMAINING</div>
                             </div>
                         )}
 

@@ -165,21 +165,29 @@ function MultiplayerRace({ socket, gameData, players, onProgressUpdate, onComple
             />
 
             {isFinished && (
-                <div className="race-finished fade-in">
-                    <h3>🏁 Race Finished!</h3>
-                    <p>Great job! Your results have been recorded.</p>
-                    <div className="race-finish-stats">
-                        <div className="finish-stat">
-                            <span className="finish-stat-value gradient-text">{currentWPM}</span>
-                            <span className="finish-stat-label">WPM</span>
-                        </div>
-                        <div className="finish-stat">
-                            <span className="finish-stat-value gradient-text">{currentAccuracy}%</span>
-                            <span className="finish-stat-label">Accuracy</span>
+                <div className="section-flat fade-in" style={{ marginTop: '3rem' }}>
+                    <div className="results-header">
+                        <h2 className="gradient-text">RACE FINISHED</h2>
+                        <p className="results-subtitle">PERFORMANCE REPORT LOGGED</p>
+                    </div>
+
+                    <div className="results-stats-flat">
+                        <div className="flex gap-md">
+                            <div className="result-stat-flat flex-1 primary">
+                                <div className="stat-value">{currentWPM}</div>
+                                <div className="stat-label">WORDS PER MINUTE</div>
+                            </div>
+                            <div className="result-stat-flat flex-1 primary">
+                                <div className="stat-value">{currentAccuracy}%</div>
+                                <div className="stat-label">ACCURACY</div>
+                            </div>
                         </div>
                     </div>
-                    <button className="btn btn-primary" onClick={onComplete}>
-                        ← Return to Lobby
+
+                    <p style={{ marginBottom: '2rem', color: 'var(--text-dim)' }}>Great job! Your results have been recorded in the global system.</p>
+
+                    <button className="btn btn-primary" onClick={onComplete} style={{ width: '100%' }}>
+                        RETURN TO LOBBY
                     </button>
                 </div>
             )}
