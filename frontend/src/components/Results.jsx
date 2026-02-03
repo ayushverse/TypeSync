@@ -26,8 +26,8 @@ function Results({ results, onRetry, onChangeDuration, durations }) {
     const performance = getPerformanceMessage();
 
     return (
-        <div className="section-flat fade-in">
-            <div className="container" style={{ maxWidth: '800px' }}>
+        <div className="section-flat fade-in" style={{ padding: '4rem 2rem' }}>
+            <div className="results-container">
                 <div className="results-header">
                     <h2 style={{ color: performance.color }}>{performance.text.toUpperCase()}</h2>
                     <p className="results-subtitle">RACE PERFORMANCE REPORT</p>
@@ -41,7 +41,7 @@ function Results({ results, onRetry, onChangeDuration, durations }) {
                         </div>
                     </div>
 
-                    <div className="flex gap-md" style={{ marginBottom: '2rem' }}>
+                    <div className="flex gap-xl" style={{ marginBottom: '4rem' }}>
                         <div className="result-stat-flat flex-1">
                             <div className="stat-value">{accuracy}%</div>
                             <div className="stat-label">ACCURACY</div>
@@ -50,9 +50,6 @@ function Results({ results, onRetry, onChangeDuration, durations }) {
                             <div className="stat-value">{timeTaken}s</div>
                             <div className="stat-label">TIME</div>
                         </div>
-                    </div>
-
-                    <div className="flex gap-md" style={{ marginBottom: '3rem' }}>
                         <div className="result-stat-flat flex-1">
                             <div className="stat-value">{correctChars}</div>
                             <div className="stat-label">CORRECT</div>
@@ -65,58 +62,54 @@ function Results({ results, onRetry, onChangeDuration, durations }) {
                 </div>
 
                 {wpmHistory && wpmHistory.length > 0 && (
-                    <div className="wpm-graph-container" style={{
-                        marginTop: '2rem',
-                        marginBottom: '4rem',
-                        padding: '1.5rem',
-                        background: 'rgba(255, 255, 255, 0.03)',
-                        borderRadius: '12px',
-                        border: '1px solid rgba(255, 255, 255, 0.1)'
-                    }}>
-                        <h4 className="text-dim" style={{ marginBottom: '1.5rem', fontSize: '0.9rem', letterSpacing: '2px' }}>WPM OVER TIME</h4>
-                        <div style={{ width: '100%', height: 250 }}>
+                    <div className="wpm-graph-container">
+                        <h4 className="text-dim" style={{ marginBottom: '2rem', fontSize: '0.9rem', letterSpacing: '3px', fontWeight: 'bold' }}>WPM OVER TIME</h4>
+                        <div style={{ width: '100%', height: 400 }}>
                             <ResponsiveContainer width="100%" height="100%">
-                                <AreaChart data={wpmHistory}>
+                                <AreaChart data={wpmHistory} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                                     <defs>
                                         <linearGradient id="colorWpm" x1="0" y1="0" x2="0" y2="1">
-                                            <stop offset="5%" stopColor="var(--accent-primary)" stopOpacity={0.3} />
+                                            <stop offset="5%" stopColor="var(--accent-primary)" stopOpacity={0.4} />
                                             <stop offset="95%" stopColor="var(--accent-primary)" stopOpacity={0} />
                                         </linearGradient>
                                     </defs>
-                                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
+                                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
                                     <XAxis
                                         dataKey="time"
-                                        stroke="rgba(255,255,255,0.5)"
+                                        stroke="rgba(255,255,255,0.3)"
                                         fontSize={12}
                                         tickLine={false}
                                         axisLine={false}
-                                        label={{ value: 'Seconds', position: 'insideBottomRight', offset: -5, fill: 'rgba(255,255,255,0.3)', fontSize: 10 }}
+                                        tick={{ dy: 10 }}
                                     />
                                     <YAxis
-                                        stroke="rgba(255,255,255,0.5)"
+                                        stroke="rgba(255,255,255,0.3)"
                                         fontSize={12}
                                         tickLine={false}
                                         axisLine={false}
                                         domain={[0, 'auto']}
+                                        tick={{ dx: -10 }}
                                     />
                                     <Tooltip
                                         contentStyle={{
-                                            backgroundColor: '#1a1a1a',
+                                            backgroundColor: 'rgba(20, 20, 20, 0.95)',
                                             border: '1px solid rgba(255,255,255,0.1)',
-                                            borderRadius: '8px',
-                                            color: '#fff'
+                                            borderRadius: '4px',
+                                            padding: '1rem',
+                                            boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
                                         }}
-                                        itemStyle={{ color: 'var(--accent-primary)' }}
-                                        cursor={{ stroke: 'rgba(255,255,255,0.2)', strokeWidth: 2 }}
+                                        itemStyle={{ color: 'var(--accent-primary)', fontWeight: 'bold' }}
+                                        cursor={{ stroke: 'var(--accent-primary)', strokeWidth: 1, strokeDasharray: '5 5' }}
                                     />
                                     <Area
                                         type="monotone"
                                         dataKey="wpm"
                                         stroke="var(--accent-primary)"
-                                        strokeWidth={3}
+                                        strokeWidth={4}
                                         fillOpacity={1}
                                         fill="url(#colorWpm)"
-                                        animationDuration={1500}
+                                        animationDuration={2000}
+                                        activeDot={{ r: 6, strokeWidth: 0, fill: 'var(--accent-primary)' }}
                                     />
                                 </AreaChart>
                             </ResponsiveContainer>
@@ -125,20 +118,20 @@ function Results({ results, onRetry, onChangeDuration, durations }) {
                 )}
 
                 <div className="results-actions-flat">
-                    <button className="btn btn-primary" onClick={onRetry} style={{ width: '100%', marginBottom: '2rem' }}>
+                    <button className="btn btn-primary" onClick={onRetry} style={{ padding: '1.5rem 4rem', fontSize: '1.2rem', marginBottom: '3rem' }}>
                         RESTART RACE
                     </button>
 
                     {durations && (
                         <div className="duration-change-flat">
-                            <p className="text-dim">FAST CHANGE DURATION:</p>
-                            <div className="flex gap-sm justify-center">
+                            <p className="text-dim">CHANGE DURATION</p>
+                            <div className="flex gap-md justify-center">
                                 {durations.map((d) => (
                                     <button
                                         key={d}
                                         className="btn btn-secondary"
                                         onClick={() => onChangeDuration(d)}
-                                        style={{ padding: '0.5rem 1rem' }}
+                                        style={{ padding: '1rem 2rem', fontSize: '1rem' }}
                                     >
                                         {d}S
                                     </button>
@@ -148,10 +141,10 @@ function Results({ results, onRetry, onChangeDuration, durations }) {
                     )}
                 </div>
 
-                <div className="results-tips-flat" style={{ marginTop: '4rem' }}>
+                <div className="results-tips-flat">
                     <h4 className="text-dim">IMPROVEMENT STRATEGY</h4>
-                    <ul className="flex-col gap-sm" style={{ listStyle: 'none', padding: 0, marginTop: '1rem' }}>
-                        {accuracy < 95 && <li style={{ color: 'var(--accent-error)' }}>! Focus on accuracy before speed</li>}
+                    <ul className="flex-col gap-md" style={{ listStyle: 'none', padding: 0 }}>
+                        {accuracy < 95 && <li style={{ color: 'var(--accent-error)', fontWeight: 'bold' }}>! Focus on accuracy before speed</li>}
                         {wpm < 60 && <li>+ Practice regularly to build muscle memory</li>}
                         {errors > 5 && <li>- Slow down and reduce errors</li>}
                         <li>+ Keep fingers on home row position</li>
