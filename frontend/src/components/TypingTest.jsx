@@ -14,6 +14,7 @@ function TypingTest({ duration = 60, onComplete, showTimer = true }) {
     const [isStarted, setIsStarted] = useState(false);
     const [isFinished, setIsFinished] = useState(false);
     const [errors, setErrors] = useState([]);
+    const [wpmHistory, setWpmHistory] = useState([]);
     const inputRef = useRef(null);
 
     useEffect(() => {
@@ -24,16 +25,26 @@ function TypingTest({ duration = 60, onComplete, showTimer = true }) {
         if (isStarted && !isFinished && timeLeft > 0) {
             const timer = setInterval(() => {
                 setTimeLeft((prev) => {
-                    if (prev <= 1) {
+                    const newTime = prev - 1;
+
+                    // Track WPM history every second
+                    const timeTaken = duration - newTime;
+                    const currentWPM = calculateWPM(correctChars, timeTaken);
+                    setWpmHistory(prevHistory => [
+                        ...prevHistory,
+                        { time: timeTaken, wpm: currentWPM }
+                    ]);
+
+                    if (newTime <= 0) {
                         finishTest();
                         return 0;
                     }
-                    return prev - 1;
+                    return newTime;
                 });
             }, 1000);
             return () => clearInterval(timer);
         }
-    }, [isStarted, isFinished, timeLeft]);
+    }, [isStarted, isFinished, timeLeft, correctChars, duration]);
 
     // Continuously add more words to ensure infinite words until timer ends
     useEffect(() => {
@@ -54,6 +65,7 @@ function TypingTest({ duration = 60, onComplete, showTimer = true }) {
         setIsStarted(false);
         setIsFinished(false);
         setErrors([]);
+        setWpmHistory([]);
         inputRef.current?.focus();
     };
 
@@ -70,7 +82,8 @@ function TypingTest({ duration = 60, onComplete, showTimer = true }) {
                 correctChars,
                 totalChars,
                 timeTaken,
-                errors: errors.length
+                errors: errors.length,
+                wpmHistory: wpmHistory
             });
         }
     };

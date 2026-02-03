@@ -1,8 +1,19 @@
 import React from 'react';
+import {
+    LineChart,
+    Line,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    ResponsiveContainer,
+    AreaChart,
+    Area
+} from 'recharts';
 import './Results.css';
 
 function Results({ results, onRetry, onChangeDuration, durations }) {
-    const { wpm, accuracy, correctChars, totalChars, timeTaken, errors } = results;
+    const { wpm, accuracy, correctChars, totalChars, timeTaken, errors, wpmHistory } = results;
 
     const getPerformanceMessage = () => {
         if (wpm >= 100) return { text: 'Incredible!', color: '#10b981' };
@@ -52,6 +63,66 @@ function Results({ results, onRetry, onChangeDuration, durations }) {
                         </div>
                     </div>
                 </div>
+
+                {wpmHistory && wpmHistory.length > 0 && (
+                    <div className="wpm-graph-container" style={{
+                        marginTop: '2rem',
+                        marginBottom: '4rem',
+                        padding: '1.5rem',
+                        background: 'rgba(255, 255, 255, 0.03)',
+                        borderRadius: '12px',
+                        border: '1px solid rgba(255, 255, 255, 0.1)'
+                    }}>
+                        <h4 className="text-dim" style={{ marginBottom: '1.5rem', fontSize: '0.9rem', letterSpacing: '2px' }}>WPM OVER TIME</h4>
+                        <div style={{ width: '100%', height: 250 }}>
+                            <ResponsiveContainer width="100%" height="100%">
+                                <AreaChart data={wpmHistory}>
+                                    <defs>
+                                        <linearGradient id="colorWpm" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="5%" stopColor="var(--accent-primary)" stopOpacity={0.3} />
+                                            <stop offset="95%" stopColor="var(--accent-primary)" stopOpacity={0} />
+                                        </linearGradient>
+                                    </defs>
+                                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
+                                    <XAxis
+                                        dataKey="time"
+                                        stroke="rgba(255,255,255,0.5)"
+                                        fontSize={12}
+                                        tickLine={false}
+                                        axisLine={false}
+                                        label={{ value: 'Seconds', position: 'insideBottomRight', offset: -5, fill: 'rgba(255,255,255,0.3)', fontSize: 10 }}
+                                    />
+                                    <YAxis
+                                        stroke="rgba(255,255,255,0.5)"
+                                        fontSize={12}
+                                        tickLine={false}
+                                        axisLine={false}
+                                        domain={[0, 'auto']}
+                                    />
+                                    <Tooltip
+                                        contentStyle={{
+                                            backgroundColor: '#1a1a1a',
+                                            border: '1px solid rgba(255,255,255,0.1)',
+                                            borderRadius: '8px',
+                                            color: '#fff'
+                                        }}
+                                        itemStyle={{ color: 'var(--accent-primary)' }}
+                                        cursor={{ stroke: 'rgba(255,255,255,0.2)', strokeWidth: 2 }}
+                                    />
+                                    <Area
+                                        type="monotone"
+                                        dataKey="wpm"
+                                        stroke="var(--accent-primary)"
+                                        strokeWidth={3}
+                                        fillOpacity={1}
+                                        fill="url(#colorWpm)"
+                                        animationDuration={1500}
+                                    />
+                                </AreaChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </div>
+                )}
 
                 <div className="results-actions-flat">
                     <button className="btn btn-primary" onClick={onRetry} style={{ width: '100%', marginBottom: '2rem' }}>
