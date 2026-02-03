@@ -41,20 +41,20 @@ function Results({ results, onRetry, onChangeDuration, durations }) {
                         </div>
                     </div>
 
-                    <div className="flex gap-xl" style={{ marginBottom: '4rem' }}>
-                        <div className="result-stat-flat flex-1">
+                    <div className="stats-grid-flat">
+                        <div className="result-stat-flat">
                             <div className="stat-value">{accuracy}%</div>
                             <div className="stat-label">ACCURACY</div>
                         </div>
-                        <div className="result-stat-flat flex-1">
+                        <div className="result-stat-flat">
                             <div className="stat-value">{timeTaken}s</div>
                             <div className="stat-label">TIME</div>
                         </div>
-                        <div className="result-stat-flat flex-1">
+                        <div className="result-stat-flat">
                             <div className="stat-value">{correctChars}</div>
                             <div className="stat-label">CORRECT</div>
                         </div>
-                        <div className="result-stat-flat flex-1">
+                        <div className="result-stat-flat">
                             <div className="stat-value">{errors}</div>
                             <div className="stat-label">ERRORS</div>
                         </div>

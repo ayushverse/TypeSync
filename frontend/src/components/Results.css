@@ -31,13 +31,25 @@
 .results-stats-flat {
     margin-bottom: 5rem;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.stats-grid-flat {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4rem;
+    width: 100%;
 }
 
 .result-stat-flat {
     padding: 1.5rem 0;
     background: transparent;
     border: none;
-    transition: transform var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    text-align: left;
 }
 
 .result-stat-flat.primary {
